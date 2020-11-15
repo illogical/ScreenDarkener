@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Screen Darkener</title>
+    <style>
+        html, body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: rgb(0, 0, 0);
+            color: #12001E;
+            overflow: hidden;
+        }
+
+        .bottom
+        {
+            position: absolute;
+            bottom: 0px;
+            margin: 30px;
+        }
+        
+        .instructions {
+            font-size: 4em
+        }
+
+        #day
+        {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 5em;
+        }
+
+        #time {
+            font-size: 7em;
+            font-family: 'Viga', sans-serif;
+        }
+
+
+
+    </style>
+    <script src="moment.js"></script>
+    <script>
+         var colorIndex = 0;
+         var colors = ["00292B", "12001E", "001D1E", "061C00", "330000"];
+         var colorInterval = 15;
+
+        function createClock(){
+            setTime();
+            setInterval(setTime, 1000); 
+            setInterval(updateTextColor, 60000 * colorInterval);      
+        }
+
+        function setTime(){
+            var time = new moment().format("h:mm a");
+            var timeEl = document.getElementById("time");
+            timeEl.innerHTML = time;   
+
+            var day = new moment().format("dddd MMM Do");
+            var dayEl = document.getElementById("day");   
+            dayEl.innerHTML = day;         
+        }
+
+        function getColor(){
+            if(colorIndex >= colors.length)
+            {
+                colorIndex = 0;
+                return colors[colorIndex];
+            }
+            return colors[colorIndex++];
+        }
+
+        function updateTextColor(){
+            var bottom = document.getElementById("bottom");
+            bottom.style.color = "#" + getColor();
+        }
+        
+
+        window.onload = createClock;
+    </script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="monitor.png">
+</head>
+<body>
+    <div class="bottom title" id="bottom">
+        <div class="instructions">
+            F11
+        </div>
+        <div id="day"></div>
+        <div id="time"></div>
+    </div>    
+</body>
+</html>
