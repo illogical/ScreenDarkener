@@ -15,17 +15,18 @@
         {
             position: absolute;
             bottom: 0px;
-            margin: 30px;
+            margin: 50px 30px;
         }
         
         .instructions {
-            font-size: 4em
+            font-size: 2.9em;
+            font-family: 'Viga', sans-serif;
         }
 
         #day
         {
             font-family: 'Quicksand', sans-serif;
-            font-size: 5em;
+            font-size: 4.5em;
         }
 
         #time {
@@ -49,13 +50,13 @@
         }
 
         function setTime(){
-            var time = new moment().format("h:mm a");
+            var time = new moment().format("h:mm A");
             var timeEl = document.getElementById("time");
             timeEl.innerHTML = time;   
 
             var day = new moment().format("dddd MMM Do");
             var dayEl = document.getElementById("day");   
-            dayEl.innerHTML = day;         
+            dayEl.innerHTML = day.toUpperCase();         
         }
 
         function getColor(){
@@ -83,7 +84,7 @@
 <body>
     <div class="bottom title" id="bottom">
         <div class="instructions">
-            F11
+            PRESS F11
         </div>
         <div id="day"></div>
         <div id="time"></div>
